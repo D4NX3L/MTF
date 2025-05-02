@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat de Finanzas IA</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #chat { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+    .mensaje { margin-bottom: 10px; }
+    .usuario { font-weight: bold; }
+    .ia { color: green; }
+  </style>
+</head>
+<body>
+  <h2>Asistente de Finanzas (IA)</h2>
+  <div id="chat"></div>
+  <form id="chatForm">
+    <input type="text" id="mensaje" placeholder="Escribe tu pregunta de finanzas..." required>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('chatForm');
+    const chat = document.getElementById('chat');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('mensaje');
+      const texto = input.value;
+      chat.innerHTML += `<div class="mensaje"><span class="usuario">Tú:</span> ${texto}</div>`;
+      input.value = '';
+
+      const response = await fetch('chat.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pregunta: texto })
+      });
+
+      const data = await response.json();
+      chat.innerHTML += `<div class="mensaje"><span class="ia">IA:</span> ${data.respuesta}</div>`;
+      chat.scrollTop = chat.scrollHeight;
+    });
+  </script>
+</body>
+</html>
