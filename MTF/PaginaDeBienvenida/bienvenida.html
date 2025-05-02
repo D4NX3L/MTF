@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTF</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff; /* letras blancas */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1e1e;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .left-buttons, .right-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header button {
+            background-color: transparent;
+            color: #00e5ff;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s, color 0.2s;
+        }
+
+        .header button:hover {
+            background-color: #00e5ff;
+            color: #121212;
+            transform: scale(1.1);
+        }
+
+        .logo {
+            font-size: 32px; 
+            font-weight: bold;
+            text-shadow: 0 0 10px #00e5ff;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 40px;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .text-container {
+            max-width: 400px;
+        }
+
+        .text-container h2, .text-container p {
+            color: #ffffff;
+        }
+
+        .cta button {
+            background-color: #00e5ff;
+            border: none;
+            color: #121212;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .cta button:hover {
+            background-color: #00bcd4;
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background-color: #1e1e1e;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .footer button {
+            background-color: #00e5ff;
+            border: none;
+            color: #121212;
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .footer button:hover {
+            background-color: #00bcd4;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="left-buttons">
+            <button>Inicio</button>
+            <button>Proyecto Principal</button>
+            <button>Ideas</button>
+            <button>Recomendaciones</button>
+            <button>Historial</button>
+            <button>Nuevos</button>
+        </div>
+        <div class="logo">MTF</div>
+        <div class="right-buttons">
+            <button>Iniciar Sesión</button>
+            <button>Registrarse</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="31772-388253161_small.mp4" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+            </video>
+        </div>
+        <div class="text-container">
+            <h2>El Dinero sí Cae de los Árboles... Pero si no lo Riegas Bien se Seca y se lo Lleva el Viento</h2>
+            <p>
+                Estamos enfocados en administrar, completar y dirigir tus metas, objetivos y ahorros con el fin de tener el mejor monitoreo posible de nuestras finanzas.
+              </p>
+              <div class="cta">
+                <button onclick="location.href='conocermás.html'">Conocer más</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button>Contacto</button>
+        <button>Sobre Nosotros</button>
+        <button>Términos</button>
+        <button>Privacidad</button>
+    </div>
+</body>
+</html>
