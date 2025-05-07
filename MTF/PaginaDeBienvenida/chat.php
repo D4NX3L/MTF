@@ -1,6 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Reemplaza con tu clave de API de OpenAI
-$apiKey = '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';
+$apiKey = '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';
 
 header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
@@ -28,10 +32,23 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($datos));
 
+// AQUÍ ESTABA FALTANDO ESTA LÍNEA CRUCIAL:
 $respuesta = curl_exec($ch);
+
+if (!$respuesta) {
+    echo json_encode(['respuesta' => 'Error al conectar con la API de OpenAI.']);
+    exit;
+}
+
 curl_close($ch);
 
 $resultado = json_decode($respuesta, true);
-$texto = $resultado['choices'][0]['message']['content'] ?? 'Error al generar respuesta.';
+
+if (isset($resultado['error'])) {
+    echo json_encode(['respuesta' => 'Error de OpenAI: ' . $resultado['error']['message']]);
+    exit;
+}
+
+$texto = $resultado['choices'][0]['message']['content'] ?? 'Respuesta vacía.';
 
 echo json_encode(['respuesta' => $texto]);
