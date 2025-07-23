@@ -1,0 +1,248 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MTF</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background-color: #121212;
+                color: #ffffff;
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                overflow: hidden;
+            }
+    
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                background-color: #1e1e1e;
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+                position: relative;
+            }
+
+            h1, h2 {
+      color: #00f0ff;
+      text-align: center;
+    }
+
+    .section {
+      background-color: #001f26;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 800px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .section h2 {
+      border-bottom: 1px solid #00f0ff;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+    
+            .logo {
+                font-size: 60px;
+                font-weight: bold;
+                text-shadow: 0 0 10px #00e5ff;
+                animation: blink 2s infinite;
+                cursor: pointer;
+                position: absolute;
+                bottom: 10px;
+                left: 20px;
+            }
+    
+            .center-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                flex: 1;
+                margin-left: 40px; 
+            }
+    
+            .right-buttons {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end; 
+            }
+    
+            .header button {
+                background-color: #121212;
+                color: #00e5ff;
+                border-radius: 10px;
+                padding: 10px 15px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: transform 0.2s, background-color 0.2s, color 0.2s;
+            }
+    
+            .header button:hover {
+                background-color: #00e5ff;
+                color: #121212;
+                transform: scale(1.1);
+            }
+    
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.5; }
+            }
+    
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 20px;
+                padding: 40px;
+                flex-wrap: wrap;
+                flex: 1;
+            }
+    
+
+            .text-container {
+                max-width: 400px;
+            }
+    
+            .text-container h2, .text-container p {
+                color: #ffffff;
+            }
+    
+            
+    
+            .footer {
+                background-color: #1e1e1e;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+    
+            .footer button {
+                background-color: #00e5ff;
+                border: none;
+                color: #121212;
+                padding: 6px 12px;
+                font-size: 12px;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+    
+            .footer button:hover {
+                background-color: #00bcd4;
+            }
+    
+            /* 👉 TRANSICIÓN CREATIVA: círculo expansivo */
+            #transition-overlay {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                width: 100px;
+                height: 100px;
+                background-color: #00e5ff;
+                border-radius: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                z-index: 9999;
+                pointer-events: none;
+            }
+    
+            #transition-overlay.animate {
+                animation: expandCircle 1s forwards;
+            }
+    
+            @keyframes expandCircle {
+                0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+                80% { transform: translate(-50%, -50%) scale(20); opacity: 1; }
+                100% { transform: translate(-50%, -50%) scale(50); opacity: 0; }
+            }
+        </style>
+    </head>
+    <body>
+    
+        <!-- 👉 OVERLAY DE TRANSICIÓN -->
+        <div id="transition-overlay"></div>
+    
+        <div class="header">
+            <div class="center-buttons">
+                <button onclick="navigate('proyecto.html')">Proyecto Principal</button>
+                <button onclick="navigate('ideas.html')">Ideas y Metas</button>
+                <button onclick="navigate('recomendaciones.html')">Recomendaciones</button>
+                <button onclick="navigate('estrategia.html')">Estrategia MTF</button>
+              </div>
+
+            
+            <div class="right-buttons">
+                <button onclick="navigate('login.html')">Iniciar Sesión</button>
+                <button onclick="navigate('registro.html')">Registrarse</button>
+            </div>
+            <div class="logo" onclick="navigate('bienvenida.html')">MTF</div>
+        </div>
+
+        <header>
+            <h1>Oprime el logo para conocer las redes sociales  </h1>
+          </header>
+
+          <div class="section">
+          <h2>facebook</h2>
+          <p>
+           <strong>tomar el control de tus finanzas</strong> 
+          </p>
+        </div>
+
+        <div class="section">
+            <h2>Instagram</h2>
+            <p>
+             <strong>tomar el control de tus finanzas</strong> 
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>X</h2>
+            <p>
+             <strong>tomar el control de tus finanzas</strong> 
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>Tik tok</h2>
+            <p>
+             <strong>tomar el control de tus finanzas</strong> 
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>t</h2>
+            <p>
+             <strong>tomar el control de tus finanzas</strong> 
+            </p>
+          </div>
+
+
+            
+                <div class="cta">
+                    <button onclick="navigate('introduccion.html')">Conocer más</button>
+                </div>
+            </div>
+        </div>
+    
+
+    
+        <!-- 👉 SCRIPT PARA ACTIVAR ANIMACIÓN Y NAVEGAR -->
+        <script>
+            function navigate(url) {
+                const overlay = document.getElementById('transition-overlay');
+                overlay.classList.add('animate');
+                overlay.style.pointerEvents = 'auto';
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 1000);
+            }
+        </script>
+    
+    </body>
+    </html>
+    
+</html>

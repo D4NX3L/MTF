@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomendaciones para Administrar tus Finanzas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow-x: hidden;
+      animation: fadeInAnimation 0.8s ease-out forwards;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    @keyframes fadeInAnimation {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header {
+      background: #121212;
+      color: #333;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #333;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    h1, h2 {
+      color: #00e5ff;
+    }
+
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1e1e1e;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .center-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex: 1;
+      margin-left: 40px;
+    }
+
+    .right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header button {
+      background-color: #121212;
+      color: #00e5ff;
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s, color 0.2s;
+    }
+
+    .header button:hover {
+      background-color: #00e5ff;
+      color: #121212;
+      transform: scale(1.1);
+    }
+
+    .logo {
+      font-size: 60px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00e5ff;
+      animation: blink 2s infinite;
+      cursor: pointer;
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    
+    #transition-overlay {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      background-color: #00e5ff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    #transition-overlay.animate {
+      animation: expandCircle 1s forwards;
+    }
+
+    @keyframes expandCircle {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      80% { transform: translate(-50%, -50%) scale(20); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(50); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <div id="transition-overlay"></div>
+
+  <div class="header">
+    <div class="center-buttons">
+      <button onclick="navigate('proyecto.html')">Proyecto Principal</button>
+      <button onclick="navigate('ideas.html')">Ideas y Metas</button>
+      <button onclick="navigate('recomendaciones.html')">Recomendaciones</button>
+      <button onclick="navigate('estrategia.html')">Estrategia MTF</button>
+    </div>
+    <div class="right-buttons">
+      <button onclick="navigate('login.html')">Iniciar Sesión</button>
+      <button onclick="navigate('registro.html')">Registrarse</button>
+    </div>
+    <div class="logo" onclick="navigate('bienvenida.html')">MTF</div>
+  </div>
+
+  <header>
+    <h1>Recomendaciones para Administrar tus Finanzas</h1>
+  </header>
+
+  <div class="container">
+    <h2>Introducción</h2>
+    <p>Administrar tus finanzas personales es una habilidad esencial para garantizar estabilidad económica y alcanzar tus metas financieras. A continuación, te presentamos una guía detallada con recomendaciones prácticas para mejorar tu gestión financiera.</p>
+
+    <h2>1. Establece un Presupuesto</h2>
+    <p>El primer paso para administrar tus finanzas es crear un presupuesto. Esto te permitirá tener una visión clara de tus ingresos y gastos.</p>
+    <ul>
+      <li>Haz una lista de todos tus ingresos mensuales.</li>
+      <li>Registra todos tus gastos, incluyendo los fijos (alquiler, servicios) y los variables (entretenimiento, compras).</li>
+      <li>Utiliza herramientas como hojas de cálculo o aplicaciones móviles para facilitar el seguimiento.</li>
+    </ul>
+
+    <h2>2. Ahorra Regularmente</h2>
+    <p>El ahorro es fundamental para enfrentar imprevistos y alcanzar objetivos a largo plazo.</p>
+    <ul>
+      <li>Establece un porcentaje fijo de tus ingresos para ahorrar cada mes.</li>
+      <li>Abre una cuenta de ahorros separada para evitar gastar ese dinero.</li>
+      <li>Considera automatizar tus ahorros para garantizar consistencia.</li>
+    </ul>
+
+    <h2>3. Reduce Gastos Innecesarios</h2>
+    <p>Identifica áreas donde puedes reducir gastos para liberar más dinero para tus prioridades.</p>
+    <ul>
+      <li>Evita compras impulsivas y prioriza lo esencial.</li>
+      <li>Busca alternativas más económicas para tus servicios o productos habituales.</li>
+      <li>Revisa tus suscripciones y cancela las que no utilices.</li>
+    </ul>
+
+    <h2>4. Invierte Inteligentemente</h2>
+    <p>Invertir es una excelente manera de hacer crecer tu dinero a largo plazo.</p>
+    <ul>
+      <li>Infórmate sobre las diferentes opciones de inversión disponibles.</li>
+      <li>Consulta con un asesor financiero si es necesario.</li>
+      <li>Diversifica tus inversiones para minimizar riesgos.</li>
+    </ul>
+
+    <h2>5. Mantén un Fondo de Emergencia</h2>
+    <p>Un fondo de emergencia te ayudará a enfrentar situaciones inesperadas sin afectar tu estabilidad financiera.</p>
+    <ul>
+      <li>Ahorrar al menos 3 a 6 meses de tus gastos básicos.</li>
+      <li>Guarda este dinero en una cuenta de fácil acceso.</li>
+    </ul>
+
+    <h2>Conclusión</h2>
+    <p>Administrar tus finanzas requiere disciplina y planificación, pero los beneficios a largo plazo valen la pena. Sigue estas recomendaciones y estarás en camino hacia una vida financiera más saludable y estable.</p>
+  </div>
+
+  <script>
+    function navigate(url) {
+      const overlay = document.getElementById('transition-overlay');
+      overlay.classList.add('animate');
+      overlay.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

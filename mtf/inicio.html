@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="icon" href="/MTF/MTF.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Financiera</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-image: url('background.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow-x: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1e1e1e;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      font-size: 60px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00e5ff;
+      animation: blink 2s infinite;
+      cursor: pointer;
+    }
+
+    .center-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex: 1;
+      margin-left: 20px;
+    }
+
+    .right-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .header button, .herramienta button, .footer button {
+      background-color: #121212;
+      color: #00e5ff;
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s, color 0.2s;
+    }
+
+    .header button:hover, .herramienta button:hover, .footer button:hover {
+      background-color: #00e5ff;
+      color: #121212;
+      transform: scale(1.1);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    nav {
+      background-color: #000000;
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 2px solid #009e8e;
+    }
+
+    nav h1 {
+      font-size: 48px;
+      color: #009e8e;
+      margin: 0;
+    }
+
+    nav p {
+      font-size: 20px;
+      color: #66fff2;
+      margin-top: 10px;
+    }
+
+    .contenido {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .contenido h2 {
+      color: #009e8e;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .contenido p {
+      color: #cccccc;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+
+    .boton-inicio {
+      background-color: #009e8e;
+      color: #000000;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .boton-inicio:hover {
+      background-color: #00776b;
+    }
+  </style>
+</head>
+<body>
+  <div id="transition-overlay"></div>
+
+  <!-- Header con el logo clickeable que regresa atrás -->
+  <div class="header">
+    <div class="logo" onclick="history.back()">MTF</div>
+    <div class="center-buttons">
+      <button onclick="navigate('proyecto.html')">Proyecto Principal</button>
+      <button onclick="navigate('ideas.html')">Ideas y Metas</button>
+      <button onclick="navigate('recomendaciones.html')">Recomendaciones</button>
+      <button onclick="navigate('estrategia.html')">Estrategia MTF</button>
+    </div>
+    <div class="right-buttons">
+      <button onclick="navigate('login.html')">Iniciar Sesión</button>
+      <button onclick="navigate('registro.html')">Registrarse</button>
+    </div>
+  </div>
+
+  <nav>
+    <h1>Meta Financiera</h1>
+    <p>Tu aliado digital para una vida financiera organizada</p>
+  </nav>
+
+  <div class="contenido">
+    <h2>Transforma tus finanzas personales</h2>
+    <p><strong>Meta Financiera</strong> es una plataforma inteligente diseñada para ayudarte a administrar tus ingresos, gastos, deudas y metas financieras. Nuestro objetivo es brindarte las herramientas necesarias para tomar decisiones informadas y alcanzar tus objetivos económicos con confianza.</p>
+
+    <p>Con nuestra interfaz intuitiva, puedes visualizar reportes, establecer presupuestos mensuales, recibir alertas de gastos y seguir el progreso hacia tus metas de ahorro. Ya seas estudiante, trabajador independiente o empresario, Meta Financiera se adapta a tu estilo de vida y necesidades.</p>
+
+    <p>¡Empieza hoy y toma el control de tu futuro financiero!</p>
+
+    <button class="boton-inicio">Comenzar Ahora</button>
+  </div>
+
+  <!-- Función para los botones -->
+  <script>
+    function navigate(url) {
+      window.location.href = url;
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estrategia de Meta Financiera</title>
+  <link rel="icon" href="/MTF/MTF.png" type="image/png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #00f0ff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      background-color: #001f26;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #00f0ff;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 10px #00f0ff;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: #00f0ff;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      padding: 10px 20px;
+      background-color: #003d4d;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .tab-button.active {
+      background-color: #00f0ff;
+      color: #000;
+    }
+
+    .form-section {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px auto;
+      max-width: 700px;
+    }
+
+    input, button {
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    input {
+      width: 200px;
+      background-color: #001f26;
+      color: #00f0ff;
+    }
+
+    .add-btn {
+      background-color: #00f0ff;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .entries {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+    }
+
+    .entry {
+      background-color: #001f26;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      word-wrap: break-word;
+    }
+
+    #grafico {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #001f26;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    @media screen and (max-width: 600px) {
+      input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a class="logo" onclick="window.history.back()">MTF</a>
+  </div>
+
+  <h1>Estrategia de Meta Financiera</h1>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="changeTab('movimientos', event)">Movimientos</button>
+    <button class="tab-button" onclick="changeTab('inversiones', event)">Inversiones</button>
+    <button class="tab-button" onclick="changeTab('metas', event)">Metas</button>
+    <button class="tab-button" onclick="changeTab('ahorros', event)">Ahorros</button>
+    <button class="tab-button" onclick="changeTab('historial', event)">Historial MTF</button>
+  </div>
+
+  <div class="form-section" id="formulario">
+    <input type="text" id="descripcion" placeholder="Descripción completa" />
+    <input type="text" id="monto" placeholder="Monto ($)" oninput="formatearMonto(this)" />
+    <button class="add-btn" onclick="agregarEntrada()">Agregar</button>
+  </div>
+
+  <div class="entries" id="lista"></div>
+  <div>
+    <canvas id="grafico" height="400"></canvas>
+  </div>
+
+  <script>
+    const datos = {
+      movimientos: [],
+      inversiones: [],
+      metas: [],
+      ahorros: []
+    };
+
+    let tipoActual = 'movimientos';
+    let grafico;
+
+    function formatearMonto(input) {
+      let val = input.value.replace(/\./g, '').replace(',', '.');
+      if (!isNaN(val)) {
+        const num = parseFloat(val).toFixed(2);
+        input.value = new Intl.NumberFormat('es-CO').format(num);
+      }
+    }
+
+    function limpiarFormato(valor) {
+      return parseFloat(valor.replace(/\./g, '').replace(',', '.'));
+    }
+
+    function changeTab(tipo, e) {
+      tipoActual = tipo;
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById('formulario').style.display = tipo === 'historial' ? 'none' : 'flex';
+      renderizar();
+    }
+
+    function agregarEntrada() {
+      const desc = document.getElementById('descripcion').value.trim();
+      const montoInput = document.getElementById('monto').value.trim();
+      const monto = limpiarFormato(montoInput);
+
+      if (!desc || isNaN(monto)) return;
+
+      datos[tipoActual].push({
+        descripcion: desc,
+        monto: monto,
+        fecha: new Date().toLocaleString(),
+        tipo: tipoActual
+      });
+
+      document.getElementById('descripcion').value = '';
+      document.getElementById('monto').value = '';
+      renderizar();
+    }
+
+    function renderizar() {
+      const lista = document.getElementById('lista');
+      lista.innerHTML = '';
+      const mostrar = tipoActual === 'historial'
+        ? [...datos.movimientos, ...datos.inversiones, ...datos.metas, ...datos.ahorros].sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+        : datos[tipoActual];
+
+      mostrar.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `<strong>${entry.descripcion}</strong>: $${entry.monto.toLocaleString("es-CO", { minimumFractionDigits: 2 })}<br><small>${entry.fecha} — <em>${entry.tipo}</em></small>`;
+        lista.appendChild(div);
+      });
+
+      if (tipoActual !== 'historial') graficar(mostrar);
+    }
+
+    function graficar(data) {
+      const ctx = document.getElementById('grafico').getContext('2d');
+      if (grafico) grafico.destroy();
+
+      const labels = data.map(d => d.descripcion);
+      const valores = data.map(d => d.monto);
+
+      grafico = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Monto ($)',
+            data: valores,
+            fill: false,
+            borderColor: '#00f0ff',
+            tension: 0.3,
+            pointBackgroundColor: '#00f0ff',
+            pointRadius: 5,
+            pointHoverRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: '#00f0ff'
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  return `$${context.raw.toLocaleString("es-CO", { minimumFractionDigits: 2 })}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: '#00f0ff' },
+              grid: { color: '#003d4d' }
+            },
+            y: {
+              ticks: {
+                color: '#00f0ff',
+                callback: function (value) {
+                  return `$${value.toLocaleString("es-CO")}`;
+                }
+              },
+              grid: { color: '#003d4d' }
+            }
+          },
+          animation: {
+            duration: 1000,
+            easing: 'easeOutCubic'
+          }
+        }
+      });
+    }
+
+    renderizar();
+  </script>
+</body>
+</html>
+
+
+

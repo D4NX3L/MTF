@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estrategia de Meta Financiera</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00f0ff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00f0ff;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tab-button {
+      padding: 10px 20px;
+      background-color: #003d4d;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .tab-button.active {
+      background-color: #00f0ff;
+      color: #000;
+    }
+    .form-section, .entries, .graph {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+    }
+    input, button {
+      padding: 10px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+    input {
+      width: 150px;
+      background-color: #001f26;
+      color: #00f0ff;
+    }
+    .add-btn {
+      background-color: #00f0ff;
+      color: #000;
+      cursor: pointer;
+    }
+    .entry {
+      background-color: #001f26;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+    }
+    canvas {
+      background-color: #001f26;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Estrategia de Meta Financiera</h1>
+
+  <div class="tabs">
+    <button class="tab-button active" onclick="changeTab('movimientos')">Movimientos</button>
+    <button class="tab-button" onclick="changeTab('inversiones')">Inversiones</button>
+    <button class="tab-button" onclick="changeTab('metas')">Metas</button>
+    <button class="tab-button" onclick="changeTab('ahorros')">Ahorros</button>
+    <button class="tab-button" onclick="changeTab('historial')">Historial MTF</button>
+  </div>
+
+  <div class="form-section" id="formulario">
+    <input type="text" id="descripcion" placeholder="Descripción" />
+    <input type="number" id="monto" placeholder="Monto" />
+    <button class="add-btn" onclick="agregarEntrada()">Agregar</button>
+  </div>
+
+  <div class="entries" id="lista"></div>
+
+  <div class="graph" id="graficos">
+    <canvas id="grafico" width="700" height="300"></canvas>
+  </div>
+
+  <script>
+    const datos = {
+      movimientos: [],
+      inversiones: [],
+      metas: [],
+      ahorros: [],
+    };
+    let tipoActual = 'movimientos';
+
+    function changeTab(tipo) {
+      tipoActual = tipo;
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Mostrar u ocultar formulario y grafico
+      document.getElementById('formulario').style.display = tipo === 'historial' ? 'none' : 'block';
+      document.getElementById('graficos').style.display = tipo === 'historial' ? 'none' : 'block';
+
+      renderizar();
+    }
+
+    function agregarEntrada() {
+      const desc = document.getElementById('descripcion').value;
+      const monto = parseFloat(document.getElementById('monto').value);
+      if (!desc || isNaN(monto)) return;
+
+      datos[tipoActual].push({
+        descripcion: desc,
+        monto,
+        fecha: new Date().toLocaleDateString(),
+        tipo: tipoActual
+      });
+
+      document.getElementById('descripcion').value = '';
+      document.getElementById('monto').value = '';
+      renderizar();
+    }
+
+    function renderizar() {
+      const lista = document.getElementById('lista');
+      lista.innerHTML = '';
+
+      let mostrar = [];
+
+      if (tipoActual === 'historial') {
+        mostrar = [...datos.movimientos, ...datos.inversiones, ...datos.metas, ...datos.ahorros];
+        mostrar.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+      } else {
+        mostrar = datos[tipoActual];
+      }
+
+      mostrar.forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `
+          <strong>${entry.descripcion}</strong>: $${entry.monto.toFixed(2)}
+          <br><small>${entry.fecha} — <em>${entry.tipo || tipoActual}</em></small>
+        `;
+        lista.appendChild(div);
+      });
+
+      if (tipoActual !== 'historial') graficar();
+    }
+
+    function graficar() {
+      const canvas = document.getElementById('grafico');
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const data = datos[tipoActual];
+      if (data.length === 0) return;
+
+      const max = Math.max(...data.map(d => d.monto));
+      const step = canvas.width / (data.length + 1);
+
+      ctx.beginPath();
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 2;
+
+      data.forEach((d, i) => {
+        const x = step * (i + 1);
+        const y = canvas.height - (d.monto / max) * (canvas.height - 40);
+        ctx.lineTo(x, y);
+      });
+
+      ctx.stroke();
+
+      data.forEach((d, i) => {
+        const x = step * (i + 1);
+        const y = canvas.height - (d.monto / max) * (canvas.height - 40);
+        ctx.fillStyle = '#00f0ff';
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    renderizar();
+  </script>
+</body>
+</html>

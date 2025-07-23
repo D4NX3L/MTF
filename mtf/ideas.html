@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas y Metas</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        .logo-header img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .logo-header span {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            color: #00e5ff; /* Azul */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo que regresa atrás -->
+    <div class="logo-header" onclick="history.back()">
+        <span>MTF</span>
+    </div>
+
+    <div class="container">
+        <h1>¿Cómo funciona nuestro método de ideas y Metas?</h1>
+        <p>Nuestro método de ideas y metas es una herramienta la cual nos va a permitir llegar a objetivos planeados mediante planes financieros muy bien estructurados que te permiten guardar dinero de manera organizada para alcanzar objetivos específicos. Puedes establecer metas como:</p>
+        <ul>
+            <li>Ahorrar para unas vacaciones.</li>
+            <li>Comprar un automóvil.</li>
+            <li>Crear un fondo de emergencia.</li>
+        </ul>
+
+        <h2>Pasos para utilizar un Fondo de Ahorro:</h2>
+        <ol>
+            <li><strong>Define tus metas:</strong> Establece objetivos claros y específicos.</li>
+            <li><strong>Establece un presupuesto:</strong> Decide cuánto dinero puedes ahorrar regularmente.</li>
+            <li><strong>Monitorea tu progreso:</strong> Revisa periódicamente cuánto has ahorrado y ajusta según sea necesario.</li>
+        </ol>
+
+        <p>Con disciplina y constancia, un fondo de ahorro puede ayudarte a alcanzar tus metas financieras de manera eficiente.</p>
+    </div>
+
+</body>
+</html>
